@@ -12,6 +12,21 @@
     <header>
         <h1> <a href="{% url 'home'  %}"> JustErkinovBlog </a> </h1>
     </header>
+    {% if user.is_authenticated %}
+        <p>Xush kelibsiz!, {{ user.username }}</p>
+        <p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+        <button type="submit">Saytdan chiqish</button>
+</form>
+        </p>
+    {% else %}
+        <p>
+            <a href="{% url 'login' %}">Saytga kirish</a>
+            <a href="{% url 'signup' %}">Ruyxatdan o'tish</a>
+
+        </p>
+    {% endif %}
 
 <div>
     {% block content %}
